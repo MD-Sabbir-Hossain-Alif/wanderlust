@@ -12,13 +12,22 @@ import {
 } from "@heroui/react";
 
 const AddDestinations = () => {
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
         const newDestination = Object.fromEntries(formData.entries());
 
-        console.log(newDestination);
+        // console.log(newDestination);
+        const res = await fetch("http://localhost:8000/destination", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newDestination),
+        });
+        const data = await res.json();
+        console.log(data);
     };
     return (
         <>
