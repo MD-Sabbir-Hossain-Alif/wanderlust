@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 const PagesLayout = ({ children }) => {
@@ -5,6 +6,7 @@ const PagesLayout = ({ children }) => {
         <div className="container mx-auto">
             <Navbar />
             {children}
+            <Footer />
         </div>
     );
 };
