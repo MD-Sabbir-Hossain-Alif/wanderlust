@@ -3,7 +3,7 @@ import Destinations from "@/components/Destinations";
 const DestinationsPage = async () => {
     const res = await fetch("http://localhost:8000/destination");
     const destinations = await res.json();
-    console.log(destinations);
+    // console.log(destinations);
     return (
         <div className="my-5">
             <h2 className="text-5xl text-center my-10">All Destinations</h2>
