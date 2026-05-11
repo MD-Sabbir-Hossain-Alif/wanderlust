@@ -2,6 +2,7 @@ import { Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import EditModalBtn from "./EditModalBtn";
+import DeleteAlertDialog from "./DeleteAlertDialog";
 
 const DestinationDetails = async ({ destination }) => {
     const {
@@ -24,9 +25,10 @@ const DestinationDetails = async ({ destination }) => {
                 </Link>
                 <div className="flex justify-between items-center gap-4">
                     <EditModalBtn destination={destination}></EditModalBtn>
-                    <Link href="/">
-                        <Button variant="danger">Delete</Button>
-                    </Link>
+                    <DeleteAlertDialog
+                        variant="danger"
+                        destination={destination}
+                    ></DeleteAlertDialog>
                 </div>
             </div>
 

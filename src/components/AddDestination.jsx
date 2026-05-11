@@ -27,7 +27,8 @@ const AddDestinations = () => {
             body: JSON.stringify(newDestination),
         });
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
+        alert("Destination Added");
     };
     return (
         <>
