@@ -1,8 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PersonFill } from "@gravity-ui/icons";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import User from "./User";
+import Logout from "./Logout";
 
-const Navbar = () => {
+const Navbar = async () => {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    const user = session?.user;
+    // console.log(user);
+
     return (
         <nav className="sticky top-0 z-40 w-full border-b border-separator bg-[#ffffff]">
             <header className="relative flex h-16 items-center justify-between px-6">
@@ -30,16 +39,26 @@ const Navbar = () => {
                     ></Image>
                 </div>
                 <ul className="flex items-center gap-4">
-                    <li className="flex gap-1 items-center">
-                        <PersonFill />
-                        <Link href="/profile">Profile</Link>
-                    </li>
-                    <li>
-                        <Link href="/login">Login</Link>
-                    </li>
-                    <li>
-                        <Link href="/signup">Sign Up</Link>
-                    </li>
+                    {user ? (
+                        <>
+                            <li className="flex gap-2 items-center">
+                                <Link href="/profile">{user?.name}</Link>
+                                <User user={user}></User>
+                            </li>
+                            <li>
+                                <Logout></Logout>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li>
+                                <Link href="/login">Login</Link>
+                            </li>
+                            <li>
+                                <Link href="/signup">Sign Up</Link>
+                            </li>
+                        </>
+                    )}
                 </ul>
             </header>
         </nav>

@@ -27,9 +27,9 @@ const SignupForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const newUserData = Object.fromEntries(formData);
+        const newuser = Object.fromEntries(formData);
 
-        const { name, image, email, password } = newUserData;
+        const { name, image, email, password } = newuser;
 
         const { data, error } = await authClient.signUp.email({
             name,

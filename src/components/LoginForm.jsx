@@ -1,6 +1,6 @@
 "use client";
 
-import { Check } from "@gravity-ui/icons";
+import { authClient } from "@/lib/auth-client";
 import {
     Button,
     Description,
@@ -11,15 +11,30 @@ import {
     TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { LuLock, LuMail } from "react-icons/lu";
 
 const LoginForm = () => {
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        const userLoginData = Object.fromEntries(formData);
-        console.log(userLoginData);
+        const user = Object.fromEntries(formData);
+        console.log(user);
 
-        alert(`Form submitted with: ${JSON.stringify(data, null, 2)}`);
+        const { email, password } = user;
+
+        const { data, error } = await authClient.signIn.email({
+            email,
+            password,
+            callbackURL: "/",
+        });
+
+        if (data) {
+            alert(`Log in success!: ${JSON.stringify(data, null, 2)}`);
+        } else if (error) {
+            alert(
+                error?.message || "Failed to create account. Please try again.",
+            );
+        }
     };
 
     return (
@@ -63,7 +78,10 @@ const LoginForm = () => {
                             return null;
                         }}
                     >
-                        <Label>Email</Label>
+                        <Label className="flex gap-1">
+                            <LuMail size="16" />
+                            <span>Email Address</span>
+                        </Label>
                         <Input placeholder="john@example.com" />
                         <FieldError />
                     </TextField>
@@ -87,7 +105,10 @@ const LoginForm = () => {
                             return null;
                         }}
                     >
-                        <Label>Password</Label>
+                        <Label className="flex gap-1">
+                            <LuLock size="16" />
+                            <span>Password</span>
+                        </Label>
                         <Input placeholder="Enter your password" />
                         <Description>
                             Must be at least 8 characters with 1 uppercase and 1
@@ -97,12 +118,12 @@ const LoginForm = () => {
                     </TextField>
 
                     <div className="flex gap-2">
-                        <Button type="submit">
-                            <Check />
-                            Submit
-                        </Button>
-                        <Button type="reset" variant="secondary">
-                            Reset
+                        <Button
+                            type="submit"
+                            size="lg"
+                            className="w-full text-base font-semibold py-7 rounded-2xl"
+                        >
+                            Log in
                         </Button>
                     </div>
                 </Form>

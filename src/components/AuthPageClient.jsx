@@ -6,7 +6,7 @@ import LoginForm from "./LoginForm";
 
 const AuthPageClient = () => {
     const path = usePathname();
-    console.log(path);
+    // console.log(path);
     return (
         <>
             {path === "/signup" ? (
