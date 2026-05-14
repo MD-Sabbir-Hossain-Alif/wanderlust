@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import EditModalBtn from "./EditModalBtn";
 import DeleteAlertDialog from "./DeleteAlertDialog";
+import BookingCard from "./BookingCard";
 
 const DestinationDetails = async ({ destination }) => {
     const {
@@ -44,16 +45,23 @@ const DestinationDetails = async ({ destination }) => {
 
             {/* content */}
             <div className="mt-6 space-y-3">
-                <h1 className="text-4xl font-bold">{destinationName}</h1>
+                <div className="flex justify-between items-center">
+                    <div className="space-y-3">
+                        <h1 className="text-4xl font-bold">
+                            {destinationName}
+                        </h1>
 
-                <p className="text-gray-600 text-lg">
-                    {country} • {category}
-                </p>
+                        <p className="text-gray-600 text-lg">
+                            {country} • {category}
+                        </p>
 
-                <div className="flex gap-5 text-lg font-semibold">
-                    <span>💰 ${price}</span>
-                    <span>⏳ {duration}</span>
-                    <span>📅 {departureDate}</span>
+                        <div className="text-lg font-semibold">
+                            <span>⏳ {duration}</span>
+                        </div>
+                    </div>
+                    <div className="max-w-1/4 w-full">
+                        <BookingCard destination={destination}></BookingCard>
+                    </div>
                 </div>
 
                 <div>

@@ -1,12 +1,9 @@
 "use client";
-import { authClient } from "@/lib/auth-client";
+import logoutAction from "@/lib/action";
 import { Button } from "@heroui/react";
 
-const Logout = () => {
-    const handleLogout = async () => {
-        await authClient.signOut();
-    };
-    return <Button onClick={handleLogout}>Log out</Button>;
+const Logout = ({ logoutAction }) => {
+    return <Button onClick={logoutAction}>Log out</Button>;
 };
 
 export default Logout;

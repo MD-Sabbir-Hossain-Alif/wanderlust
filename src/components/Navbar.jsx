@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import User from "./User";
 import Logout from "./Logout";
+import logoutAction from "@/lib/action";
 
 const Navbar = async () => {
     const session = await auth.api.getSession({
@@ -46,7 +47,7 @@ const Navbar = async () => {
                                 <User user={user}></User>
                             </li>
                             <li>
-                                <Logout></Logout>
+                                <Logout logoutAction={logoutAction}></Logout>
                             </li>
                         </>
                     ) : (

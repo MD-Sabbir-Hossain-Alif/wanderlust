@@ -18,7 +18,7 @@ const LoginForm = () => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const user = Object.fromEntries(formData);
-        console.log(user);
+        // console.log(user);
 
         const { email, password } = user;
 
@@ -29,7 +29,9 @@ const LoginForm = () => {
         });
 
         if (data) {
-            alert(`Log in success!: ${JSON.stringify(data, null, 2)}`);
+            alert(
+                `Log in success! Name: ${data?.user?.name} Email: ${data?.user?.email}`,
+            );
         } else if (error) {
             alert(
                 error?.message || "Failed to create account. Please try again.",
