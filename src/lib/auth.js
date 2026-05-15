@@ -1,6 +1,6 @@
-// dns server for mongodb connection
-const dns = require("node:dns");
-dns.setServers(["1.1.1.1", "8.8.8.8"]); // Cloudflare + Google DNS
+// dns for server error
+import { setServers } from "node:dns/promises";
+setServers(["1.1.1.1", "8.8.8.8"]);
 
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
