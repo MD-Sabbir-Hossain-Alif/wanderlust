@@ -1,8 +1,9 @@
 import { Button, Card } from "@heroui/react";
 import Image from "next/image";
-import { LuCalendar, LuMapPin, LuTrash2, LuEye, LuCheck } from "react-icons/lu";
+import { LuCalendar, LuMapPin, LuEye, LuCheck } from "react-icons/lu";
+import CancelAlert from "./CancelAlert";
 
-const MyBookedCard = ({ booked }) => {
+const MyBookedCard = async ({ booked }) => {
     const { _id, imageUrl, departureDate, destinationName } = booked;
     const formatted = new Date(departureDate).toLocaleDateString("en-US", {
         month: "short",
@@ -80,13 +81,7 @@ const MyBookedCard = ({ booked }) => {
 
                     {/* Action Buttons */}
                     <div className="flex justify-center items-center gap-4">
-                        <Button
-                            variant="outline"
-                            className="text-red-500 border-red-500 rounded-none"
-                        >
-                            <LuTrash2 className="w-5 h-5" />
-                            Cancel
-                        </Button>
+                        <CancelAlert booked={booked}></CancelAlert>
 
                         <Button className="bg-[#15a1bf]  rounded-none">
                             <LuEye className="w-5 h-5" />
