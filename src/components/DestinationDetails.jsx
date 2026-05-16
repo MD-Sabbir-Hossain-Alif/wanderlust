@@ -10,9 +10,7 @@ const DestinationDetails = async ({ destination }) => {
         destinationName,
         country,
         category,
-        price,
         duration,
-        departureDate,
         imageUrl,
         description,
     } = destination;

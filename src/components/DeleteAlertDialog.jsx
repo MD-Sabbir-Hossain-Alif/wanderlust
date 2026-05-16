@@ -6,10 +6,13 @@ const DeleteAlertDialog = ({ destination }) => {
     const { _id, destinationName } = destination;
 
     const handleDelete = async () => {
+        const { data: tokenData } = await authClient.token();
+
         const res = await fetch(`http://localhost:8000/destination/${_id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                authorization: `Bearer ${tokenData?.token}`,
             },
         });
 

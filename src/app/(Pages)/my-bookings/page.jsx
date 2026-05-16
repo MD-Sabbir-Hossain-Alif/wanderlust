@@ -7,12 +7,19 @@ const page = async () => {
         headers: await headers(), // you need to pass the headers object.
     });
     // console.log(session?.user);
+
+    const { token } = await auth.api.getToken({
+        headers: await headers(),
+    });
+
     let data = [];
 
     if (session) {
-        const { id } = session.user;
+        const { id } = session?.user;
         const res = await fetch(`http://localhost:8000/my-bookings/${id}`, {
-            cache: "no-store",
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
         });
         data = await res.json();
         // console.log(data);

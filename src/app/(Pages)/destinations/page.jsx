@@ -1,7 +1,17 @@
 import Destinations from "@/components/Destinations";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const DestinationsPage = async () => {
-    const res = await fetch("http://localhost:8000/destination");
+    const { token } = await auth.api.getToken({
+        headers: await headers(),
+    });
+
+    const res = await fetch("http://localhost:8000/destination", {
+        headers: {
+            authorization: `Bearer ${token}`,
+        },
+    });
     const destinations = await res.json();
     // console.log(destinations);
     return (

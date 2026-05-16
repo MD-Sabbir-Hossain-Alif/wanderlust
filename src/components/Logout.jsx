@@ -1,5 +1,4 @@
 "use client";
-import logoutAction from "@/lib/action";
 import { Button } from "@heroui/react";
 
 const Logout = ({ logoutAction }) => {

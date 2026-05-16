@@ -31,13 +31,19 @@ const EditModalBtn = ({ destination }) => {
         const formData = new FormData(e.target);
         const updatedDestination = Object.fromEntries(formData.entries());
 
+        const { data: tokenData } = await authClient.token();
+
         const res = await fetch(`http://localhost:8000/destination/${_id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                authorization: `Bearer ${tokenData?.token}`,
             },
             body: JSON.stringify(updatedDestination),
         });
+
+        const data = await res.json();
+        // console.log(data)
 
         console.log("form submitted", updatedDestination);
         alert("Update Success");
