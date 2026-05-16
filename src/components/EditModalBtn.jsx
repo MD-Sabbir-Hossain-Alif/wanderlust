@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
     Button,
     FieldError,
@@ -33,14 +34,17 @@ const EditModalBtn = ({ destination }) => {
 
         const { data: tokenData } = await authClient.token();
 
-        const res = await fetch(`http://localhost:8000/destination/${_id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${tokenData?.token}`,
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_API}/destination/${_id}`,
+            {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${tokenData?.token}`,
+                },
+                body: JSON.stringify(updatedDestination),
             },
-            body: JSON.stringify(updatedDestination),
-        });
+        );
 
         const data = await res.json();
         // console.log(data)

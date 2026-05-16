@@ -1,17 +1,9 @@
 import Destinations from "@/components/Destinations";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 
 const DestinationsPage = async () => {
-    const { token } = await auth.api.getToken({
-        headers: await headers(),
-    });
-
-    const res = await fetch("http://localhost:8000/destination", {
-        headers: {
-            authorization: `Bearer ${token}`,
-        },
-    });
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_API}/destination`,
+    );
     const destinations = await res.json();
     // console.log(destinations);
     return (

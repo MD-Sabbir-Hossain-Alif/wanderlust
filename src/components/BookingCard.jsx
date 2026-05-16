@@ -30,14 +30,17 @@ const BookingCard = ({ destination }) => {
         const { data: tokenData } = await authClient.token();
         // console.log(tokenData);
 
-        const res = await fetch("http://localhost:8000/my-bookings", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${tokenData?.token}`,
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_API}/my-bookings`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${tokenData?.token}`,
+                },
+                body: JSON.stringify(bookingData),
             },
-            body: JSON.stringify(bookingData),
-        });
+        );
 
         const data = await res.json();
         if (data) {

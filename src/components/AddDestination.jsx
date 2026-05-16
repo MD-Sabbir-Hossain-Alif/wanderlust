@@ -22,14 +22,17 @@ const AddDestinations = () => {
         const { data: tokenData } = await authClient.token();
 
         // console.log(newDestination);
-        const res = await fetch("http://localhost:8000/destination", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${tokenData?.token}`,
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_API}/destination`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${tokenData?.token}`,
+                },
+                body: JSON.stringify(newDestination),
             },
-            body: JSON.stringify(newDestination),
-        });
+        );
         const data = await res.json();
         // console.log(data);
         alert("Destination Added");

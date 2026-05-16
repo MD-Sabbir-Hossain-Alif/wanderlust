@@ -9,13 +9,16 @@ const CancelAlert = ({ booked }) => {
     const handleCancel = async () => {
         const { data: tokenData } = await authClient.token();
 
-        const res = await fetch(`http://localhost:8000/my-booking/${_id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${tokenData?.token}`,
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_API}/my-booking/${_id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${tokenData?.token}`,
+                },
             },
-        });
+        );
         const data = await res.json();
         // console.log(data);
         redirect("/my-bookings");

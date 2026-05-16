@@ -12,11 +12,14 @@ const DetailsPage = async ({ params }) => {
 
     // console.log(token);
 
-    const res = await fetch(`http://localhost:8000/destination/${id}`, {
-        headers: {
-            authorization: `Bearer ${token}`,
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_API}/destination/${id}`,
+        {
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
         },
-    });
+    );
     const destination = await res.json();
     // console.log(destination);
     return (

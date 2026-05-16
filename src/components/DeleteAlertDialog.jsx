@@ -1,4 +1,5 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { redirect } from "next/navigation";
 
@@ -8,13 +9,16 @@ const DeleteAlertDialog = ({ destination }) => {
     const handleDelete = async () => {
         const { data: tokenData } = await authClient.token();
 
-        const res = await fetch(`http://localhost:8000/destination/${_id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${tokenData?.token}`,
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_API}/destination/${_id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: `Bearer ${tokenData?.token}`,
+                },
             },
-        });
+        );
 
         const data = await res.json();
         // console.log(data);
