@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import Featured from "@/components/Featured";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
@@ -9,6 +10,7 @@ export default function Home() {
 				<Navbar></Navbar>
 			</div>
 			<Banner></Banner>
+			<Featured></Featured>
 			<Footer></Footer>
 		</div>
 	);
